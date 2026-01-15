@@ -1,0 +1,1223 @@
+/*HOMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE*/
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  background-color: #eaf7fb;
+  padding: 22px 50px;
+  display: flex;
+  justify-content: space-between; /* left + right */
+  align-items: center;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Clinic name */
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+  color: #023e8a;
+  letter-spacing: 1px;
+}
+
+/* Links container */
+.nav-links a {
+  color: #023e8a;
+  text-decoration: none;
+  margin-left: 28px;
+  font-size: 16.5px;
+  font-weight: 500;
+  position: relative;
+}
+
+/* underline hover */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background-color: #90e0ef;
+  left: 0;
+  bottom: -6px;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Book Now – call to action */
+.nav-links .cta {
+  background-color: #90e0ef;
+  padding: 10px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+}
+
+.nav-links .cta::after {
+  display: none;
+}
+
+.nav-links .cta:hover {
+  background-color: #7ad3e6;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1px; /* space between logo and text */
+  font-size: 22px;
+  font-weight: 700;
+  color: #023e8a;
+}
+
+.logo img {
+  height: 40px; /* control logo size */
+  width: auto; /* keep proportions */
+}
+
+.footer {
+  background-color: #dceff5; /* light but visible */
+  color: #023e8a;
+  padding: 0px 40px;
+  display: flex;
+  justify-content: center; /* center columns */
+  gap: 80px; /* space between columns */
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.footer-col {
+  flex: 0 0 250px;
+  margin: 0px 60px;
+  position: relative;
+  top: 40px;
+}
+
+.footer-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.footer-logo img {
+  height: 40px;
+}
+
+.social-icons {
+  margin-top: 15px;
+  padding-left: 45px;
+}
+
+.social-icons img {
+  height: 24px;
+  margin: 0 8px;
+  cursor: pointer;
+}
+
+.contact-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.contact-item img {
+  height: 18px;
+}
+
+.footer a {
+  color: #023e8a;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.adress-icon {
+  margin-bottom: 28px;
+}
+
+.footer-bottom {
+  width: 100%;
+  border-top: 1px solid #bfdde8;
+  text-align: center;
+  font-size: 13px;
+  color: #023e8a;
+}
+
+.home {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* FULL viewport height */
+  overflow: hidden; /* prevent scrollbars from extra image overflow */
+}
+
+/* Image */
+.home-photo {
+  width: 100%;
+  height: 100%; /* full container height */
+  object-fit: cover; /* scale nicely */
+  display: block;
+}
+
+/* Text container ON image */
+.home-text-box {
+  position: absolute;
+  top: 40%;
+  left: 30%; /* adjust horizontal position */
+  transform: translate(-50%, -50%);
+  text-align: left;
+
+  background: rgba(0, 0, 0, 0.001); /* semi-transparent black */
+  padding: 30px 20px;
+  border-radius: 14px;
+  color: white;
+}
+
+/* Main text */
+.home-text {
+  font-family: "Lustria", serif;
+  font-size: 100px;
+  font-weight: 300;
+  margin-bottom: 15px;
+  max-width: 550px;
+}
+
+/* Smaller text */
+.home-subtext {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 20px;
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+/*SERVICEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE*/
+/* Container 3x2 */
+.services-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* Card Base */
+.service-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  height: 300px;
+  cursor: pointer;
+}
+
+.service-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease, filter 0.3s ease;
+}
+
+/* Titulli i Shërbimit (Gjithmonë i dukshëm në qendër) */
+.service-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(12, 60, 96, 0.85); /* Blu e errët */
+  color: #fff;
+  padding: 12px 24px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 4px;
+  width: 80%; /* Që të kenë gjerësi të njëjtë */
+  text-align: center;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+/* Butoni Learn More (I fshehur fillimisht) */
+.learn-more {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #0c3c60; /* Blu e fortë */
+  color: white;
+  padding: 12px 30px;
+  border-radius: 6px;
+  font-weight: bold;
+  opacity: 0; /* Fshihet */
+  transition: all 0.3s ease;
+  z-index: 3;
+}
+
+/* Efekti Hover */
+.service-card:hover img {
+  transform: scale(1.1);
+  filter: brightness(70%); /* Erret pak fotoja që të duket butoni */
+}
+
+.service-card:hover .service-title {
+  opacity: 0; /* Titulli zhduket kur vjen mausi */
+}
+
+.service-card:hover .learn-more {
+  opacity: 1; /* Shfaqet butoni Learn More */
+}
+
+/*SERVICEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEGENRALDENTISTYRYYYYY*/
+
+:root {
+  --primary: #0c3c60;
+  --accent: #f0f7fb;
+  --white: #ffffff;
+  --text-main: #2d3436;
+  --text-soft: #636e72;
+  --shadow-soft: 0 20px 40px rgba(12, 60, 96, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.85);
+}
+
+/* Global & Container */
+body {
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text-main);
+  line-height: 1.8;
+  margin: 0;
+  background-color: var(--white);
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.section-padding {
+  padding: 100px 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* --- HERO SECTION (Me Background Soft Blue & Curve) --- */
+.service-hero {
+  background: linear-gradient(135deg, #f0f7fb 0%, #ffffff 100%);
+  padding: 140px 0 160px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-hero::before {
+  content: "";
+  position: absolute;
+  top: -10%;
+  right: -5%;
+  width: 400px;
+  height: 400px;
+  background: rgba(12, 60, 96, 0.03);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.service-hero h1 {
+  font-size: 64px;
+  color: var(--primary);
+  font-weight: 800;
+  letter-spacing: -2px;
+  margin-bottom: 15px;
+}
+
+/* --- INTRO CARD (Efekti i Xhamit / Glassmorphism) --- */
+.intro-card {
+  max-width: 850px;
+  margin: -80px auto 60px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 50px;
+  border-radius: 40px;
+  box-shadow: 0 30px 60px rgba(12, 60, 96, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  position: relative;
+  z-index: 10;
+  text-align: center;
+}
+
+.intro-card span {
+  display: block;
+  color: var(--text-soft);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.intro-card p {
+  font-size: 22px;
+  line-height: 1.6;
+  color: var(--primary);
+  font-weight: 500;
+  margin: 0;
+}
+
+/* --- LAYOUT (Foto dhe Tekst) --- */
+.flex-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.flex-row.reverse {
+  direction: rtl;
+}
+.flex-row.reverse .flex-col {
+  direction: ltr;
+}
+
+/* --- FOTO ME FORMË ORGANIKE (BLOB STYLE) --- */
+.image-container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Dekori blu i hapur pas fotos */
+.image-container::before {
+  content: "";
+  position: absolute;
+  width: 110%;
+  height: 110%;
+  background: #e1edf7;
+  top: -5%;
+  left: -5%;
+  z-index: -1;
+  border-radius: 64% 36% 27% 73% / 55% 58% 42% 45%;
+  animation: blob-bounce 8s infinite alternate;
+}
+
+.rounded-img {
+  width: 100%;
+  height: 550px;
+  object-fit: cover;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  box-shadow: 0 25px 50px rgba(12, 60, 96, 0.15);
+  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.rounded-img:hover {
+  border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+  transform: scale(1.02);
+}
+
+@keyframes blob-bounce {
+  0% {
+    border-radius: 64% 36% 27% 73% / 55% 58% 42% 45%;
+  }
+  100% {
+    border-radius: 40% 60% 54% 46% / 49% 41% 59% 51%;
+  }
+}
+
+/* --- STATS BAR --- */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: var(--accent);
+  padding: 60px;
+  border-radius: 40px;
+  text-align: center;
+  margin: 60px 0;
+}
+
+.stat-item h3 {
+  font-size: 42px;
+  color: var(--primary);
+  margin-bottom: 5px;
+}
+
+.stat-item p {
+  color: var(--text-soft);
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+/* --- TREATMENT CARDS --- */
+.treatment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.t-card {
+  padding: 45px;
+  background: var(--white);
+  border-radius: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  transition: all 0.4s ease;
+  border: 1px solid #f1f2f6;
+}
+
+.t-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 20px 40px rgba(12, 60, 96, 0.08);
+  border-color: var(--primary);
+}
+
+.t-card h3 {
+  color: var(--primary);
+  margin-top: 0;
+}
+
+/* --- FAQ ACCORDION --- */
+.faq-container {
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+details {
+  margin-bottom: 15px;
+  padding: 25px;
+  background: #f9fbff;
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+details[open] {
+  background: var(--white);
+  box-shadow: var(--shadow-soft);
+}
+
+summary {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--primary);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+summary::after {
+  content: "+";
+  font-size: 24px;
+}
+
+/* --- BACK BUTTON (Glass & Hover) --- */
+.back-container {
+  text-align: center;
+  padding: 100px 0;
+  background: linear-gradient(to top, var(--accent), #ffffff);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 20px 40px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(12, 60, 96, 0.1);
+  border-radius: 50px;
+  box-shadow: 0 10px 25px rgba(12, 60, 96, 0.05);
+  transition: all 0.4s ease;
+}
+
+.back-link i {
+  font-style: normal;
+  font-size: 22px;
+  transition: transform 0.3s ease;
+}
+
+.back-link:hover {
+  background: var(--primary);
+  color: #ffffff;
+  transform: translateY(-5px);
+}
+
+.back-link:hover i {
+  transform: translateX(-8px);
+}
+/* safddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd*/
+/* --- HERO SECTION --- */
+.fees-hero {
+  position: relative;
+  height: 500px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: #000;
+}
+
+.hero-bg img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.65);
+  z-index: 1;
+}
+
+.white-diagonal {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 160px;
+  background: #fff;
+  clip-path: polygon(0 100%, 100% 100%, 100% 0);
+  z-index: 2;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  padding-left: 8%;
+}
+
+.fees-title {
+  color: white;
+  font-family: "Georgia", serif;
+  font-size: 52px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.btn-book {
+  display: inline-block;
+  background: #0d436b;
+  color: white;
+  padding: 12px 28px;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+/* --- KONTEINERI ME DY KOLONA TË PAVARURA --- */
+.fees-main-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* E rëndësishme: i mban kolonat të pavarura në lartësi */
+  gap: 30px; /* Hapësira mes dy kolonave */
+  max-width: 1200px;
+  margin: -70px auto 50px; /* Ngjitja mbi diagonale */
+  padding: 0 20px;
+  position: relative;
+  z-index: 20;
+}
+
+.fees-column {
+  flex: 1; /* I ndan kolonat 50/50 */
+  display: flex;
+  flex-direction: column;
+  gap: 25px; /* Hapësira vertikale mes kutive brenda kolonës */
+}
+
+/* --- STILIMI I KUTIVE --- */
+.fee-card {
+  background: white;
+  border: 1px solid #e2e2e2;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Titulli klikues (Dropdown Header) */
+summary.card-title {
+  padding: 22px 25px;
+  background-color: #f9f9f9; /* Ngjyra gri e lehtë */
+  font-family: "Georgia", serif;
+  font-size: 19px;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #0d436b; /* Ngjyra blu e errët */
+  font-weight: bold;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+.plus-icon {
+  font-size: 22px;
+  font-weight: 300;
+}
+
+/* Lista brenda kutisë */
+.inner-list {
+  padding: 25px;
+  border-top: 1px solid #eee;
+}
+
+.fee-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 15px;
+  font-family: "Georgia", serif;
+  color: #444;
+}
+
+/* Vija me pika (Dot Leader) */
+.dot-leader {
+  flex-grow: 1;
+  border-bottom: 1px dotted #aebbc9; /* Ngjyra e saktë e pikave */
+  margin: 0 12px;
+}
+/* TEAMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM*/
+/* Kutia kryesore - Shumë kompakte */
+.register-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px; /* Madhësi më e vogël */
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 123, 255, 0.1);
+  font-family: "Segoe UI", Arial, sans-serif;
+  border: 1px solid #eef2f6;
+  text-align: center;
+}
+
+/* Titulli */
+.register-title {
+  margin: 0;
+  color: #0077b6;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* Teksti "Care for your smile" - I lakuar (Italic) */
+.register-container::after {
+  content: "Care for your smile";
+  display: block;
+  font-family: "Georgia", serif; /* Font më elegant/kurvë */
+  font-style: italic;
+  font-size: 13px;
+  color: #00b4d8;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+/* Grupet e formës - Më të ngjeshura */
+.form-group {
+  margin-bottom: 9px;
+  text-align: left;
+}
+
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #023e8a;
+  margin-bottom: 4px;
+  margin-left: 2px;
+}
+
+/* Inputet - Më të hollë */
+.form-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1.5px solid #caf0f8;
+  border-radius: 8px;
+  font-size: 13px;
+  background-color: #f8fdff;
+  box-sizing: border-box;
+  transition: 0.2s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #00b4d8;
+  background-color: #ffffff;
+}
+
+/* Terms & Conditions - Më të vegjël */
+.terms-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0;
+  text-align: left;
+}
+
+.form-checkbox {
+  width: 14px;
+  height: 14px;
+  accent-color: #00b4d8;
+  cursor: pointer;
+}
+
+.terms-text {
+  font-size: 11px;
+  color: #555;
+}
+
+/* Butoni - I shkurtër dhe me ngjyrë të fortë */
+.btn-submit {
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(58, 123, 213, 0.2);
+  transition: 0.3s;
+}
+
+.btn-submit:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+/* Login Link */
+.login-redirect {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.redirect-text {
+  font-size: 12px;
+  color: #777;
+}
+
+.login-link {
+  color: #0077b6;
+  text-decoration: none;
+  font-weight: 700;
+}
+/*LOGINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNnnnnnn */
+/* 1. Sfondi me foto - I izoluar plotësisht */
+.bg-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("image/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(6px); /* Efekti blur */
+  transform: scale(1.05); /* Zmadhim i vogël për të mbuluar anët e bluruara */
+  z-index: -1; /* E mban gjithmonë në fund */
+}
+
+/* 2. Kontenjeri i Loginit - I pozicionuar saktë */
+.login-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  z-index: 999;
+}
+
+/* 3. Titulli dhe Slogani me Hapësira të saktë */
+.login-title {
+  margin: 0;
+  color: #0077b6;
+  font-size: 22px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.login-container::after {
+  content: "Care for your smile";
+  display: block;
+  font-family: "Georgia", serif;
+  font-style: italic;
+  font-size: 13px;
+  color: #00b4d8;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 25px; /* Hapësirë e bollshme (Gap) */
+}
+
+/* 4. Fushat e formës */
+.form-group {
+  margin-top: 14px;
+  margin-bottom: 10px; /* Gap mes fushave */
+}
+
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 0px;
+  margin-left: 2px;
+}
+
+.form-input {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  border: 1.5px solid #dceefb;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box; /* E mban fiks 300px pa dalë jashtë */
+  transition: border-color 0.3s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #00b4d8;
+  background: #fff;
+}
+
+/* 5. Linku Forgot Password */
+.forgot-pass {
+  text-align: right;
+  margin-top: -10px;
+  margin-bottom: 20px;
+}
+
+.forgot-link {
+  font-size: 11px;
+  color: #0077b6;
+  text-decoration: none;
+}
+
+/* 6. Butoni */
+.btn-submit {
+  width: 100%;
+  height: 44px;
+  background: linear-gradient(135deg, #00d2ff, #0077b6);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 119, 182, 0.2);
+  transition: 0.3s;
+}
+
+.btn-submit:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+/* 7. Footer - Hapësira e fundit */
+.register-redirect {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+  text-align: center;
+}
+
+.redirect-text {
+  font-size: 12px;
+  color: #666;
+  margin: 0;
+}
+
+.register-link {
+  color: #0077b6;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+/* VAlidimFRONTTTTTTTTTTTT*/
+/* Gabimet */
+.text-danger {
+  color: #d90429;
+  font-size: 11px;
+  font-weight: 600;
+  display: block;
+  margin-top: 4px;
+  min-height: 15px; /* Rezervon hapësirën */
+}
+
+/* Klasa që do shtohet nga JS për inputin e kuq */
+.is-invalid {
+  border-color: #d90429 !important;
+  background-color: #fff5f5 !important;
+}
+
+/* teamiiiiii */
+.team-section {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 blloqe në rresht */
+  gap: 30px;
+}
+
+.doctor-card {
+  background: #fff;
+  text-align: center;
+}
+
+/* Containeri i fotos që mban edhe overlay-in */
+.doctor-image-container {
+  position: relative;
+  height: 380px;
+  overflow: hidden;
+  background-color: #f4f4f4;
+}
+
+.doctor-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+/* Overlay i informacionit në hover */
+.doctor-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(13, 67, 107, 0.9); /* Bluja profesionale */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  box-sizing: border-box;
+  opacity: 0; /* I fshehur */
+  transition: opacity 0.4s ease;
+  z-index: 2;
+}
+
+.info-text p {
+  color: white;
+  font-family: "Georgia", serif;
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Emri dhe profesioni që rrinë gjithmonë të dukshëm */
+.doctor-info-basic {
+  padding: 20px 10px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-top: none;
+}
+
+.doctor-info-basic h3 {
+  margin: 0 0 5px 0;
+  font-family: "Georgia", serif;
+  font-size: 20px;
+  color: #0d436b;
+}
+
+.doctor-info-basic h4 {
+  margin: 0;
+  font-size: 14px;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+
+/* Hover Effects */
+.doctor-card:hover .doctor-overlay {
+  opacity: 1; /* Shfaq përshkrimin */
+}
+
+.doctor-card:hover img {
+  transform: scale(1.08); /* Zmadhon pak foton */
+}
+
+/* NOAUTHHHHHHHHHHHHHHHHHHHhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh */
+.auth-footer {
+  position: fixed;
+  bottom: 10px; /* E ulur pothuajse në fund fare */
+  right: 15px; /* Më afër anës së djathtë */
+  text-align: right;
+  font-family: sans-serif;
+  line-height: 1.2; /* Ngjesh rreshtat vertikalisht */
+}
+
+.auth-footer p {
+  margin: 0; /* Heq hapësirën e tepërt poshtë paragrafit */
+  font-size: 12px; /* Shkrim pak më i vogël për t'u dukur më kompakt */
+  color: #777;
+}
+
+.auth-links {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px; /* Shumë pak hapësirë mes Linkeve dhe vijës | */
+  margin-top: 2px; /* Ngjit linket me tekstin e copyright-it */
+}
+
+.auth-links a {
+  text-decoration: none;
+  color: #007bff;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.auth-links span {
+  color: #ccc;
+  font-size: 12px;
+}
+
+/* CONTACTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT*/
+/* Stilimi kryesor i faqes Contact */
+.contact-page {
+  padding: 60px 10%;
+  background-color: #f4f7f9; /* Ngjyrë e lehtë që të çlodh syrin */
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Kutia e madhe bardhë që mban të dyja pjesët */
+.contact-container {
+  display: flex;
+  background: #ffffff;
+  width: 100%;
+  max-width: 1100px;
+  border-radius: 20px;
+  overflow: hidden; /* Që qoshet e hartës të priten sipas kutisë */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Pjesa e majtë me tekstet */
+.contact-info {
+  flex: 1;
+  padding: 50px;
+}
+
+.contact-info h2 {
+  color: #2a7fba; /* Bluja e klinikës */
+  font-size: 32px;
+  margin-bottom: 15px;
+  font-family: "Arial", sans-serif;
+}
+
+.contact-info p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+/* Stilimi i kartave të informacionit (Email, Tel, Adresa) */
+.info-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.info-card img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.info-card h4 {
+  margin: 0;
+  color: #333;
+  font-size: 16px;
+}
+
+.info-card a,
+.info-card p {
+  margin: 0;
+  color: #555;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+/* Ikonat Sociale */
+.contact-socials {
+  margin-top: 40px;
+  display: flex;
+  gap: 15px;
+}
+
+.contact-socials img {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.contact-socials img:hover {
+  transform: translateY(-5px); /* Efekt lëvizjeje kur i prek */
+}
+
+/* Pjesa e djathtë ku rri harta */
+.contact-map {
+  flex: 1;
+  background: #eee;
+  min-height: 450px;
+}
+
+/* Rregullimi për celularë (që harta të dalë poshtë tekstit) */
+@media (max-width: 768px) {
+  .contact-container {
+    flex-direction: column;
+  }
+  .contact-page {
+    padding: 20px;
+  }
+  .contact-info {
+    padding: 30px;
+  }
+}

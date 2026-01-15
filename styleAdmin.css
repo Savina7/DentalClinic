@@ -1,0 +1,821 @@
+/* ===== RESET & BAZA ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f4f7f9;
+  color: #333;
+  display: flex;
+}
+
+/* ===== SIDEBAR ===== */
+.layout-sidebar {
+  width: 260px;
+  background-color: #2c3e50;
+  color: #fff;
+  height: 100vh;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.sidebar-logo-box {
+  padding: 25px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #3498db;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 20px 0;
+}
+
+.nav-links-list {
+  list-style: none;
+}
+
+.nav-item-link {
+  display: flex;
+  align-items: center;
+  padding: 12px 25px;
+  color: #bdc3c7;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.nav-item-link i {
+  margin-right: 15px;
+  width: 20px;
+  text-align: center;
+}
+
+.nav-item-link:hover,
+.active-nav-page {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-left: 4px solid #3498db;
+}
+
+.logout-section-bottom {
+  padding: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logout-color {
+  color: #e74c3c !important;
+}
+
+/* ===== MAIN CONTENT ===== */
+.admin-main {
+  margin-left: 260px; /* Hapësira për sidebar */
+  padding: 40px;
+  width: calc(100% - 260px);
+}
+
+.admin-header {
+  margin-bottom: 30px;
+}
+
+.admin-header h1 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+}
+
+.admin-header p {
+  color: #7f8c8d;
+}
+
+/* ===== APPOINTMENT CARDS ===== */
+.appointments-list {
+  display: grid;
+  gap: 20px;
+}
+
+.appointment-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eef2f6;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.patient-info {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  background: #ebf5fb;
+  color: #3498db;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-right: 15px;
+}
+
+.patient-info h3 {
+  font-size: 1.1rem;
+  margin-bottom: 2px;
+}
+
+.service-tag {
+  font-size: 0.8rem;
+  background: #e1f5fe;
+  color: #0288d1;
+  padding: 2px 10px;
+  border-radius: 15px;
+  font-weight: bold;
+}
+
+/* BUTTONS */
+.action-buttons button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-left: 10px;
+  transition: 0.2s;
+}
+
+.btn-approve {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.btn-approve:hover {
+  background-color: #27ae60;
+}
+
+.btn-reject {
+  background-color: #fff;
+  color: #e74c3c;
+  border: 1px solid #e74c3c !important;
+}
+
+.btn-reject:hover {
+  background-color: #fdf2f2;
+}
+
+/* DETAILS GRID */
+.card-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.detail-item {
+  font-size: 0.9rem;
+  color: #555;
+  display: flex;
+  align-items: center;
+}
+
+.detail-item i {
+  color: #3498db;
+  margin-right: 10px;
+  width: 16px;
+}
+
+/* NOTE SECTION */
+.patient-note {
+  background: #f8f9fa;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  border-left: 4px solid #3498db;
+  margin-bottom: 15px;
+}
+
+.view-details {
+  text-decoration: none;
+  color: #3498db;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.view-details:hover {
+  text-decoration: underline;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  .admin-main {
+    margin-left: 70px;
+    width: calc(100% - 70px);
+  }
+  .layout-sidebar {
+    width: 70px;
+  }
+  .clinic-name-text,
+  .nav-item-link span {
+    display: none;
+  }
+}
+
+/* ===== SIDEBAR STYLES ===== */
+.layout-sidebar {
+  width: 260px;
+  background-color: #2c3e50;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+}
+
+.layout-sidebar .sidebar-logo-box {
+  padding: 30px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #3498db;
+}
+
+.layout-sidebar .nav-links-list {
+  list-style: none;
+  padding: 0;
+}
+
+.layout-sidebar .nav-item-link {
+  display: flex;
+  align-items: center;
+  padding: 15px 25px;
+  color: #bdc3c7;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.layout-sidebar .nav-item-link i {
+  margin-right: 15px;
+  width: 20px;
+  text-align: center;
+}
+
+.layout-sidebar .nav-item-link:hover,
+.layout-sidebar .active-nav-page {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  border-left: 4px solid #3498db;
+}
+
+.layout-sidebar .logout-section-bottom {
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 20px 0;
+}
+
+.layout-sidebar .logout-color {
+  color: #fab1a0 !important;
+}
+
+/* ===== MAIN CONTENT STYLES ===== */
+.layout-content {
+  margin-left: 260px; /* Shtyn content-in djathtas sidebar-it */
+  padding: 40px;
+  flex-grow: 1;
+}
+
+.welcome-section-header {
+  margin-bottom: 40px;
+}
+
+.welcome-section-header h1 {
+  font-size: 28px;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.welcome-section-header p {
+  color: #7f8c8d;
+  margin-top: 5px;
+}
+
+/* ===== CARDS STYLES ===== */
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.info-box-card {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.info-box-card:hover {
+  transform: translateY(-5px);
+}
+
+.icon-wrapper-circle {
+  width: 65px;
+  height: 65px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  margin-right: 20px;
+}
+
+.bg-blue-soft {
+  background-color: #e3f2fd;
+  color: #3498db;
+}
+
+.stat-title-label {
+  color: #95a5a6;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.stat-main-text {
+  font-size: 22px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 0;
+}
+
+/* ===== FOOTER STYLES ===== */
+.dashboard-footer {
+  margin-left: 260px;
+  background: #ffffff;
+  padding: 20px 40px;
+  border-top: 1px solid #edf2f7;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #95a5a6;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #3498db;
+  margin: 0 10px;
+}
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .layout-sidebar {
+    width: 70px;
+  }
+  .layout-sidebar .clinic-name-text,
+  .layout-sidebar .nav-item-link span {
+    display: none;
+  }
+  .layout-content,
+  .dashboard-footer {
+    margin-left: 70px;
+  }
+  .layout-sidebar .nav-item-link {
+    justify-content: center;
+  }
+}
+
+/* PATIENTSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS */
+
+/* --- Stili i Faqes së Pacientëve --- */
+
+/* Body specifik për këtë faqe */
+.patients-page-body {
+  background-color: #f1f5f9;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  display: flex; /* Ndihmon në rreshtimin e Sidebar me Content */
+}
+
+/* Kontenieri kryesor - KETU ESHTE RREGULLIMI */
+.patients-page-body .custom-section-wrapper {
+  flex: 1;
+  margin-left: 260px; /* SHTYN TABELEN DJATHAS: Duhet te jete sa gjeresia e menus tende */
+  padding: 2.5rem;
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow-x: hidden; /* Parandalon scroll-in horizontal te panevojshem */
+}
+
+/* Header Section */
+.custom-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.custom-page-header h1 {
+  font-size: 1.75rem;
+  color: #1e293b;
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.custom-page-header p {
+  color: #64748b;
+  margin: 0.35rem 0 0 0;
+  font-size: 0.95rem;
+}
+
+/* Butoni Blu modern */
+.custom-btn-primary {
+  background-color: #2563eb;
+  color: white !important;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+  box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+}
+
+.custom-btn-primary:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+}
+
+/* Karta e Tabelës */
+.custom-data-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  overflow-x: auto; /* Lejon scroll-in e tabeles nese ka shume kolona ne ekran te vogel */
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  min-width: 600px; /* Siguron qe tabela nuk shtypet shume */
+}
+
+.custom-table th {
+  background-color: #f8fafc;
+  padding: 1.1rem 1.5rem;
+  color: #475569;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.custom-table td {
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid #f1f5f9;
+  color: #475569;
+  font-size: 0.95rem;
+  vertical-align: middle;
+}
+
+.custom-table tr:hover {
+  background-color: #fcfdfe;
+}
+
+.patient-name {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* Butonat Edit dhe Delete */
+.action-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-edit-custom,
+.btn-delete-custom {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: 0.2s;
+}
+
+.btn-edit-custom {
+  color: #2563eb;
+  background: #eff6ff;
+}
+
+.btn-delete-custom {
+  color: #ef4444;
+  background: #fef2f2;
+}
+
+.btn-edit-custom:hover {
+  background: #dbeafe;
+  color: #1e40af;
+}
+.btn-delete-custom:hover {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Rregullim për Mobile dhe Tableta */
+@media (max-width: 992px) {
+  .patients-page-body .custom-section-wrapper {
+    margin-left: 0; /* Heq hapesiren anesore ne mobile */
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .custom-page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+}
+
+/* ===== DENTISTSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS ===== */
+/* ===== DENTISTS LIST STYLING (MATCHED TO PATIENTS STYLE) ===== */
+
+/* Container-i kryesor që mban Sidebar dhe Content */
+.admin-page-container {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8fafc;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar Styling - Ngjyra e errët profesionale */
+.sidebar-wrapper {
+  width: 260px;
+  background-color: #2c3e50; /* Ngjyra e njejte me pacientet */
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+}
+
+.sidebar-brand {
+  padding: 30px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.brand-icon {
+  color: #3498db;
+  font-size: 1.3rem;
+}
+
+.brand-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #3498db;
+}
+
+/* Navigimi në Sidebar */
+.sidebar-navigation {
+  flex-grow: 1;
+  padding-top: 20px;
+}
+
+.nav-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 15px 25px;
+  color: #bdc3c7;
+  text-decoration: none;
+  transition: 0.3s ease;
+  gap: 12px;
+}
+
+.nav-link i {
+  width: 20px;
+  text-align: center;
+}
+
+.nav-link:hover,
+.nav-link-active {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #ffffff !important;
+  border-left: 4px solid #3498db;
+}
+
+.nav-link-logout {
+  color: #fab1a0 !important; /* Ngjyra e kuqerremte per logout */
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: auto;
+}
+
+/* Main Content Area */
+.main-content-area {
+  margin-left: 260px; /* Sa gjeresia e sidebar */
+  flex: 1;
+  padding: 40px;
+  background-color: #f8fafc;
+}
+
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.header-title {
+  font-size: 28px;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.header-subtitle {
+  color: #7f8c8d;
+  margin-top: 5px;
+}
+
+/* Butoni Add New */
+.action-button-add {
+  background-color: #3498db;
+  color: white;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: 0.2s;
+  border: none;
+}
+
+.action-button-add:hover {
+  background-color: #2980b9;
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+}
+
+/* Table Section Styling */
+.data-section {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.dentist-data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.column-title {
+  background-color: #f8fafc;
+  text-align: left;
+  padding: 18px 15px;
+  border-bottom: 2px solid #e2e8f0;
+  color: #64748b;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.table-data-row:hover {
+  background-color: #f9fbff;
+}
+
+.cell-data {
+  padding: 15px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #334155;
+  font-size: 14px;
+}
+
+.cell-name {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* Badge për Specializimin */
+.specialty-badge {
+  background-color: #ebf5ff;
+  color: #3182ce;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Butoni Delete (Vetëm Delete sipas kërkesës) */
+.action-link-delete {
+  background-color: #fff5f5;
+  color: #e53e3e;
+  text-decoration: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.action-link-delete:hover {
+  background-color: #e53e3e;
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sidebar-wrapper {
+    width: 70px;
+  }
+  .brand-name,
+  .nav-link-text,
+  .header-subtitle {
+    display: none;
+  }
+  .main-content-area {
+    margin-left: 70px;
+  }
+  .nav-link {
+    justify-content: center;
+    padding: 20px;
+  }
+}
+
+/* Status badge për pacient */
+.badge {
+  padding: 0.4rem 0.7rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: 0.35rem;
+}
+
+.badge.bg-success {
+  background-color: #28a745 !important; /* gjelbër për active */
+  color: #fff;
+}
+
+.badge.bg-secondary {
+  background-color: #6c757d !important; /* gri për inactive */
+  color: #fff;
+}
+
+/* Butoni Send Activation Link në tabela */
+.action-container .btn-warning {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  margin-top: 0.2rem;
+  display: inline-block;
+}

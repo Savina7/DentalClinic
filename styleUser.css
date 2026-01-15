@@ -1,0 +1,509 @@
+/* RESET DHE STRUKTURA BAZË */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  background-color: #f8fafc;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR - Këtu ishte problemi */
+.layout-sidebar {
+  width: 260px;
+  background-color: #2c5282; /* Bluja jote */
+  color: white;
+  position: fixed;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0; /* Hoqa padding-un anash që kutia aktive të dalë fiks */
+  z-index: 1001;
+}
+
+.sidebar-logo-box {
+  padding: 0 25px;
+  margin-bottom: 40px;
+}
+
+.clinic-name-text {
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-links-list {
+  list-style: none;
+  width: 100%;
+}
+
+.nav-item-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 25px;
+  color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ) !important; /* Shkronjat pak më të zbehta kur s'janë aktive */
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+  background: transparent !important; /* DETYRON të mos ketë background të bardhë */
+}
+
+/* KJO RREGULLON ATË KUTINË E BARDHË */
+.nav-item-link:hover,
+.active-nav-page {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ) !important; /* Vetëm një hije shumë e lehtë blu/bardhë */
+  color: white !important; /* Shkronjat bëhen të bardha fort */
+  border-left: 5px solid #4fd1c5; /* Vija mente anash */
+}
+
+.nav-icon-style {
+  width: 20px;
+  text-align: center;
+}
+
+.logout-section-bottom {
+  margin-top: auto;
+  padding: 20px 25px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logout-color {
+  color: #feb2b2 !important;
+}
+
+/* CONTENT AREA */
+.layout-content {
+  margin-left: 260px;
+  width: calc(100% - 260px);
+  padding: 50px;
+  padding-bottom: 120px;
+}
+
+.welcome-section-header h1 {
+  font-size: 32px;
+  color: #1e293b;
+  margin-bottom: 10px;
+}
+
+/* PROMO CARD */
+.hero-promo-card {
+  background: #2c5282;
+  color: white;
+  padding: 40px;
+  border-radius: 20px;
+  margin: 30px 0;
+}
+
+/* STATS GRID - 2 KARTA */
+.dashboard-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+.info-box-card {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+  border: 1px solid #e2e8f0;
+}
+
+.icon-wrapper-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg-blue-soft {
+  background: #e0f2fe;
+  color: #0ea5e9;
+}
+.bg-green-soft {
+  background: #dcfce7;
+  color: #22c55e;
+}
+
+/* FOOTER - I rregulluar më i vogël */
+.dashboard-footer {
+  position: fixed;
+  bottom: 0;
+  left: 260px;
+  right: 0;
+  background: white;
+  border-top: 1px solid #e2e8f0;
+  padding: 12px 40px; /* E bëra pak më të hollë */
+  z-index: 1000;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  /* Këtu ndryshova madhësinë */
+  font-size: 12px;
+  color: #94a3b8; /* Një gri pak më e lehtë që të mos vrasë syrin */
+}
+
+.footer-links {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.footer-links a {
+  color: #4a5568; /* Ngjyrë më e qetë për linket */
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer-links a:hover {
+  color: #2c5282; /* Bëhet blu vetëm kur i kalon mausin sipër */
+  text-decoration: underline;
+}
+
+.separator {
+  color: #cbd5e0;
+}
+
+/*mY ProfileEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE */
+
+/* Layout & Sidebar */
+.layout-sidebar {
+  width: 240px;
+  background: #2c3e50;
+  height: 100vh;
+  position: fixed;
+  color: white;
+  padding: 20px 0;
+}
+.layout-content {
+  margin-left: 240px;
+  padding: 40px;
+  background: #f4f7f6;
+  min-height: 100vh;
+}
+
+/* Profile Card */
+.profile-card {
+  background: white;
+  max-width: 650px; /* E zvogëluar që të duket më mirë */
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  display: flex;
+  gap: 30px;
+  position: relative;
+  margin-top: 20px;
+}
+
+.profile-card h2 {
+  position: absolute;
+  top: -15px;
+  left: 20px;
+  background: #3498db;
+  color: white;
+  padding: 5px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+/* FOTO E VOGËL - 120px */
+.profile-image-wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  border: 3px solid #eee;
+}
+.profile-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-image-wrapper .overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+  font-size: 12px;
+  padding: 4px 0;
+  opacity: 0;
+  transition: 0.3s;
+}
+.profile-image-wrapper:hover .overlay {
+  opacity: 1;
+}
+
+/* Info Section */
+.profile-right {
+  flex: 1;
+}
+.info-row {
+  margin-bottom: 15px;
+  font-size: 15px;
+}
+.info-row strong {
+  display: inline-block;
+  width: 100px;
+  color: #7f8c8d;
+}
+
+.edit-input {
+  display: none;
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Butonat */
+.action-buttons {
+  margin-top: 20px;
+}
+#editGroup {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  padding: 8px 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+.btn-blue {
+  background: #3498db;
+  color: white;
+}
+.btn-green {
+  background: #2ecc71;
+  color: white;
+}
+.btn-red {
+  background: #e74c3c;
+  color: white;
+}
+button:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 600px) {
+  .profile-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+/* BOOK NOWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW */
+/* ============================================================
+   DENTAL BOOKING SECTION - COMPACT VERSION
+   ============================================================ */
+
+#dental-booking-section {
+  width: 100%;
+  max-width: 500px; /* Forma u zvogëlua për t'u dukur më kompakte */
+  margin-top: 40px;
+  margin-bottom: 40px;
+  margin-left: 460px; /* E shtyn formën në të djathtë të sidebar-it */
+  padding: 15px;
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+#dental-booking-section .booking-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 25px; /* Padding i brendshëm më i vogël */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+  border: 1px solid #eef2f6;
+}
+
+/* Header-i i Formës */
+#dental-booking-section .booking-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#dental-booking-section .booking-header h2 {
+  color: #2c3e50;
+  font-size: 22px; /* Fonti pak më i vogël */
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+#dental-booking-section .booking-header h2 i {
+  color: #007bff;
+}
+
+#dental-booking-section .booking-header p {
+  color: #7f8c8d;
+  font-size: 13px;
+}
+
+/* Layout i Grid-it */
+.booking-grid-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px; /* Hapësira më kompakte mes fushave */
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+/* Labelat dhe Inputet */
+#dental-booking-section label {
+  display: block;
+  font-weight: 600;
+  font-size: 12px;
+  color: #34495e;
+  margin-bottom: 6px;
+  margin-left: 2px;
+}
+
+/* Containeri për Ikonat brenda Inputeve */
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-container i {
+  position: absolute;
+  left: 15px;
+  color: #a0aec0;
+  font-size: 14px;
+  pointer-events: none;
+}
+
+/* Stilimi i Input-eve, Select-eve dhe Textarea */
+.booking-input,
+.booking-select {
+  width: 100%;
+  padding: 10px 15px 10px 40px; /* Madhësi më e vogël paddingu */
+  border: 2px solid #edf2f7;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #2d3748;
+  background-color: #f8fafc;
+  transition: all 0.3s ease;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.booking-input:focus,
+.booking-select:focus {
+  border-color: #007bff;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+/* Stilimi për fushën e mesazhit (Textarea) */
+#dental-booking-section textarea.booking-input {
+  padding-top: 10px;
+  font-family: inherit;
+  resize: none; /* Ndalon zmadhimin manual që prish dizajnin */
+}
+
+/* Pozicionimi i ikonës te Textarea */
+#dental-booking-section .input-container i.fa-comment-medical {
+  align-self: flex-start;
+  margin-top: 12px;
+}
+
+/* Stilimi për Readonly */
+.booking-input.readonly {
+  background-color: #f1f5f9;
+  color: #718096;
+  cursor: not-allowed;
+  border-style: dashed;
+}
+
+/* Butoni Konfirmo */
+.booking-submit-btn {
+  width: 100%;
+  background: #007bff;
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  margin-top: 5px;
+}
+
+.booking-submit-btn:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2);
+}
+
+.booking-submit-btn:active {
+  transform: translateY(0);
+}
+
+/* Përshtatja për pajisje më të vogla (Laptops/Tablets) */
+@media (max-width: 1100px) {
+  #dental-booking-section {
+    margin-left: 300px; /* Pakësohet hapësira në ekranet mesatare */
+  }
+}
+
+/* Përshtatja për Celular */
+@media (max-width: 768px) {
+  #dental-booking-section {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 90%;
+  }
+  .booking-grid-form {
+    grid-template-columns: 1fr;
+  }
+  .full-width {
+    grid-column: span 1;
+  }
+}
