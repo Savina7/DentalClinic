@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../auth/auth_check.php';
 // PHP Logic for services and dentists
 $services = [
     "General Dentistry", 

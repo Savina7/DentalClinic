@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once __DIR__ . '/../auth/auth_check.php';
 
 /* Kontrollo nëse user është loguar
 if(!isset($_SESSION['user_id'])){

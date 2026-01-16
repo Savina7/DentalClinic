@@ -1,5 +1,6 @@
 <?php 
 require_once "db.php"; 
+
 // 1️⃣ Merr inputet dhe sanitizo
 $firstname = htmlspecialchars(trim($_POST['firstname'] ?? ''));
 $lastname = htmlspecialchars(trim($_POST['lastname'] ?? ''));
@@ -41,19 +42,22 @@ if(!$terms){
     $errors[] = "You must accept the terms and conditions.";
 }
 
-
-
-
-$stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
+// 7️⃣ Kontrollo nëse email ekziston në DB
+$stmt = $conn->prepare("SELECT id, status FROM users WHERE email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
+
 if($result->num_rows > 0){
-    $errors[] = "Email is already registered";
+    $user = $result->fetch_assoc();
+    if($user['status'] == 'active'){
+        $errors[] = "Email is already registered.";
+    } else {
+        $errors[] = "Email already exists. Please activate your account using the link sent to you.";
+    }
 }
 
-
-// 7️⃣ Nëse ka gabime, i shfaq dhe ndalon ekzekutimin
+// 8️⃣ Nëse ka gabime, i shfaq dhe ndalon ekzekutimin
 if(!empty($errors)){
     echo json_encode([
         "status" => 400,
@@ -62,23 +66,31 @@ if(!empty($errors)){
     exit;
 }
 
-// 8️⃣ Hash i fjalëkalimit para ruajtjes në DB
+// 9️⃣ Gjenero token unik për aktivizim
+$token = bin2hex(random_bytes(16)); // 32 karaktere hex
+
+// 🔟 Hash i fjalëkalimit
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-$stmt = $conn->prepare("INSERT INTO users (firstname, lastname, email, password, role) VALUES (?, ?, ?, ?, 'user')");
-$stmt->bind_param("ssss", $firstname, $lastname, $email, $hashed_password);
+// 1️⃣1️⃣ Insert në DB me status inactive dhe token
+$stmt = $conn->prepare("INSERT INTO users (firstname, lastname, email, password, role, status, token) VALUES (?, ?, ?, ?, 'user', 'inactive', ?)");
+$stmt->bind_param("sssss", $firstname, $lastname, $email, $hashed_password, $token);
 $stmt->execute();
 
+// 1️⃣2️⃣ Nëse sukses, dërgo JSON
 if($conn->affected_rows > 0){
+    // TODO: Shto funksion për të dërguar email me token
+    // Shembull: sendActivationEmail($email, $token);
+
     echo json_encode([
         "status" => 200,
-        "message" => "Registration successful",
-        "location" => "login.php" // redirect front-end
+        "message" => "Registration successful! Please check your email to activate your account.",
+        "location" => "login.php"
     ]);
 } else {
     echo json_encode([
         "status" => 500,
-        "message" => "Database error, please try again"
+        "message" => "Database error, please try again."
     ]);
 }
 ?>

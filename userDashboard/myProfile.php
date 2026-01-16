@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once __DIR__ . '/../auth/auth_check.php';
 $user_name = "Savina";
 $user_surname = "Duka";
 $user_email = "savina@email.com";

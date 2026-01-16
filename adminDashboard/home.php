@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../auth/admin_auth_check.php';
 // Vetëm për test, pa login
 $user_name = "Admin"; // mund ta ndryshosh si të duash
 $today_appointments = 3; // numri i takimeve për sot

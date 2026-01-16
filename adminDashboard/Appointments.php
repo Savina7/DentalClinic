@@ -1,5 +1,7 @@
 <?php
+require_once __DIR__ . '/../auth/admin_auth_check.php';
 require __DIR__ . '/../auth/db.php';
+require_once __DIR__ . '/../auth/session_15.php';
 
 // Fetch pending appointments from database
 $stmt = $conn->prepare("SELECT * FROM appointments WHERE status = 'pending' ORDER BY date ASC, time ASC");
