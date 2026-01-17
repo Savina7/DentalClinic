@@ -13,8 +13,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $status = ($action === 'approve') ? 'approved' : 'denied';
 
-    $stmt = $conn->prepare("UPDATE appointments SET status = ? WHERE id = ?");
-    $stmt->bind_param("si", $status, $id);
+    if ($action === 'approve') {
+        $price = $_POST['price'] ?? 0;
+        $stmt = $conn->prepare("UPDATE appointments SET status = ?, price = ? WHERE id = ?");
+        $stmt->bind_param("sdi", $status, $price, $id);
+    } else {
+        $stmt = $conn->prepare("UPDATE appointments SET status = ? WHERE id = ?");
+        $stmt->bind_param("si", $status, $id);
+    }
 
     if ($stmt->execute()) {
         header("Location: Appointments.php");

@@ -29,11 +29,30 @@ function sendEmail($toEmail, $code, $action = 'reset') {
                 <h1>$code</h1>
                 <p>This code will expire in 1 hour.</p>
             ";
+        } elseif ($action === 'login_otp') {
+            $mail->Subject = 'Your Login Verification Code - Smile Dental';
+            $mail->Body = "
+                <h2>🔒 Login Verification</h2>
+                <p>Your login verification code is:</p>
+                <h1 style='color: #0077b6; font-size: 48px; letter-spacing: 8px;'>$code</h1>
+                <p>This code will expire in <strong>5 minutes</strong>.</p>
+                <p style='color: #666; font-size: 14px;'>If you didn't attempt to log in, please ignore this email.</p>
+            ";
+        } elseif ($action === 'register') {
+            $mail->Subject = 'Verify Your Email - Smile Dental';
+            $mail->Body = "
+                <h2>✉️ Email Verification</h2>
+                <p>Welcome to Smile Dental! Your verification code is:</p>
+                <h1 style='color: #0077b6; font-size: 48px; letter-spacing: 8px;'>$code</h1>
+                <p>This code will expire in <strong>5 minutes</strong>.</p>
+                <p>Enter this code to complete your registration.</p>
+            ";
         }
 
         $mail->send();
         return true;
     } catch (Exception $e) {
+        error_log("PHPMailer Error: " . $mail->ErrorInfo);
         return false;
     }
 }

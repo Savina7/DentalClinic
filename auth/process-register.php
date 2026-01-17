@@ -70,37 +70,44 @@ if(!empty($errors)){
     exit;
 }
 
-// 9️⃣ Gjenero token unik për aktivizim (opsional)
-$activation_token = bin2hex(random_bytes(16));
+// 9️⃣ Generate 6-digit OTP
+require_once __DIR__ . '/../mailer/mail.php';
+$otp = random_int(100000, 999999);
+$otp_expiry = date('Y-m-d H:i:s', time() + 300); // 5 minutes
 
-// 🔟 Hash i fjalëkalimit
+// 🔟 Hash password
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-// 1️⃣1️⃣ Insert në DB (përputhet me kolonat në DB)
-$stmt = $conn->prepare("
-    INSERT INTO users 
-    (firstname, lastname, email, password, role, status, activation_token)
-    VALUES (?, ?, ?, ?, 'user', 'active', ?)
-");
-$stmt->bind_param("sssss", $firstname, $lastname, $email, $hashed_password, $activation_token);
-$stmt->execute();
+// 1️⃣1️⃣ Store registration data in session (NOT in database yet)
+$_SESSION['pending_registration'] = [
+    'firstname' => $firstname,
+    'lastname' => $lastname,
+    'email' => $email,
+    'password' => $hashed_password,
+    'otp' => $otp,
+    'otp_expiry' => $otp_expiry
+];
 
-// 1️⃣2️⃣ Nëse sukses, vendos session dhe kthe JSON
-if($conn->affected_rows > 0){
-    $_SESSION['user_id'] = $conn->insert_id; // id i user të ri
-    $_SESSION['role'] = 'user';
-    $_SESSION['last_activity'] = time(); // session timeout 15 min
+// 1️⃣2️⃣ Send OTP via email
+$email_sent = sendEmail($email, $otp, 'register');
 
+if (!$email_sent) {
+    // DEVELOPMENT MODE: Show OTP on screen if email fails
+    $_SESSION['dev_otp_display'] = $otp;
+    
     echo json_encode([
         "status" => 200,
-        "message" => "Registration successful! Redirecting to home...",
-        "location" => "../userDashboard/home.php"
-    ]);
-    exit;
-} else {
-    echo json_encode([
-        "status" => 500,
-        "message" => "Database error, please try again."
+        "message" => "Email service unavailable. Your verification code is: $otp (Check console for testing)",
+        "location" => "verify_registration.php?email=" . urlencode($email)
     ]);
     exit;
 }
+
+// 1️⃣3️⃣ Redirect to verification page
+echo json_encode([
+    "status" => 200,
+    "message" => "Verification code sent to your email!",
+    "location" => "verify_registration.php?email=" . urlencode($email)
+]);
+exit;
+?>

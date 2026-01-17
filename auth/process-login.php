@@ -82,20 +82,18 @@ if (!password_verify($password, $user['password'])) {
     exit;
 }
 
-// --------- LOGIN I SUKSESSHËM ---------
+// --------- LOGIN SUCCESSFUL ---------
 $reset = $conn->prepare("UPDATE users SET failed_attempts = 0, lock_until = NULL WHERE id = ?");
 $reset->bind_param("i", $user['id']);
 $reset->execute();
 
 $_SESSION['user_id'] = $user['id'];
 $_SESSION['role'] = $user['role'];
-
-// Set last activity time per 15 minutshin
 $_SESSION['last_activity'] = time();
 
 logLogin($conn, $email, 'success', 'Login successful');
 
-// --------- REDIRECT DYNAMIK BAZUAR NË ROL ---------
+// --------- REDIRECT BASED ON ROLE ---------
 $redirect_location = ($user['role'] === 'admin') 
     ? "../adminDashboard/patients.php" 
     : "../userDashboard/home.php";
