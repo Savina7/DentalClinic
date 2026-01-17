@@ -34,9 +34,9 @@ if (!isset($activePage)) {
         </ul>
     </nav>
     <div class="logout-section-bottom">
-        <a href="logout.php" class="nav-item-link logout-color">
-            <i class="fas fa-sign-out-alt nav-icon-style"></i> <span>Logout</span>
-        </a>
-    </div>
+    <a href="/smile-dental/auth/logout.php" class="nav-item-link logout-color">
+        <i class="fas fa-sign-out-alt nav-icon-style"></i> Logout
+    </a>
+</div>
 </aside>
   

@@ -50,7 +50,7 @@ if (!$user) {
     exit;
 }
 
-// --------- CHECK BLOKIM PËR TENTATIVA ---------
+// --------- CHECK BLOKIM PËR TENTATIVA  PER 30 MINUTA---------
 if (!empty($user['lock_until']) && strtotime($user['lock_until']) > time()) {
     logLogin($conn, $email, 'blocked', 'Account temporarily locked');
     echo json_encode([
@@ -90,13 +90,20 @@ $reset->execute();
 $_SESSION['user_id'] = $user['id'];
 $_SESSION['role'] = $user['role'];
 
+// Set last activity time per 15 minutshin
+$_SESSION['last_activity'] = time();
+
 logLogin($conn, $email, 'success', 'Login successful');
+
+// --------- REDIRECT DYNAMIK BAZUAR NË ROL ---------
+$redirect_location = ($user['role'] === 'admin') 
+    ? "../adminDashboard/patients.php" 
+    : "../userDashboard/home.php";
 
 echo json_encode([
     "status" => 200,
     "message" => "Login successful!",
-    "location" => "dashboard.php"
+    "location" => $redirect_location
 ]);
 exit;
-
 ?>

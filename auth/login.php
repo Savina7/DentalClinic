@@ -6,7 +6,7 @@
     <title>Login – Smile Dental</title>
     <link rel="stylesheet" href="/smile-dental/style.css">
 </head>
-<body>
+<body class="auth-body">
 
     <img src="/smile-dental/image/background.jpg" alt="" class="bg-image">
 
@@ -27,7 +27,7 @@
             </div>
 
             <div class="forgot-pass">
-                <a href="#" class="forgot-link">Forgot Password?</a>
+                <a href="../mailer/forgot_password.php" class="forgot-link">Forgot Password?</a>
             </div>
 
             <button type="submit" class="btn-submit">Login</button>
@@ -48,6 +48,12 @@
 
     <script>
         $(document).ready(function () {
+
+            // Check for reset success
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('reset') === 'success') {
+                toastr.success("Password updated successfully! Please login.", "Success");
+            }
 
             $("#loginForm").submit(function (event) {
                 event.preventDefault(); // prevent normal form submission

@@ -1,5 +1,14 @@
-<?php 
-require_once "db.php"; 
+<?php
+// ------------------------------
+// process-register.php
+// ------------------------------
+
+session_start();
+ini_set('display_errors', 1); // vendos 1 për debug, pas testimit vë 0
+ini_set('log_errors', 1);
+error_reporting(E_ALL);
+
+require_once "db.php"; // lidhja me DB
 
 // 1️⃣ Merr inputet dhe sanitizo
 $firstname = htmlspecialchars(trim($_POST['firstname'] ?? ''));
@@ -43,21 +52,16 @@ if(!$terms){
 }
 
 // 7️⃣ Kontrollo nëse email ekziston në DB
-$stmt = $conn->prepare("SELECT id, status FROM users WHERE email = ?");
+$stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
 
 if($result->num_rows > 0){
-    $user = $result->fetch_assoc();
-    if($user['status'] == 'active'){
-        $errors[] = "Email is already registered.";
-    } else {
-        $errors[] = "Email already exists. Please activate your account using the link sent to you.";
-    }
+    $errors[] = "Email is already registered.";
 }
 
-// 8️⃣ Nëse ka gabime, i shfaq dhe ndalon ekzekutimin
+// 8️⃣ Nëse ka gabime, kthe JSON dhe exit
 if(!empty($errors)){
     echo json_encode([
         "status" => 400,
@@ -66,31 +70,37 @@ if(!empty($errors)){
     exit;
 }
 
-// 9️⃣ Gjenero token unik për aktivizim
-$token = bin2hex(random_bytes(16)); // 32 karaktere hex
+// 9️⃣ Gjenero token unik për aktivizim (opsional)
+$activation_token = bin2hex(random_bytes(16));
 
 // 🔟 Hash i fjalëkalimit
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-// 1️⃣1️⃣ Insert në DB me status inactive dhe token
-$stmt = $conn->prepare("INSERT INTO users (firstname, lastname, email, password, role, status, token) VALUES (?, ?, ?, ?, 'user', 'inactive', ?)");
-$stmt->bind_param("sssss", $firstname, $lastname, $email, $hashed_password, $token);
+// 1️⃣1️⃣ Insert në DB (përputhet me kolonat në DB)
+$stmt = $conn->prepare("
+    INSERT INTO users 
+    (firstname, lastname, email, password, role, status, activation_token)
+    VALUES (?, ?, ?, ?, 'user', 'active', ?)
+");
+$stmt->bind_param("sssss", $firstname, $lastname, $email, $hashed_password, $activation_token);
 $stmt->execute();
 
-// 1️⃣2️⃣ Nëse sukses, dërgo JSON
+// 1️⃣2️⃣ Nëse sukses, vendos session dhe kthe JSON
 if($conn->affected_rows > 0){
-    // TODO: Shto funksion për të dërguar email me token
-    // Shembull: sendActivationEmail($email, $token);
+    $_SESSION['user_id'] = $conn->insert_id; // id i user të ri
+    $_SESSION['role'] = 'user';
+    $_SESSION['last_activity'] = time(); // session timeout 15 min
 
     echo json_encode([
         "status" => 200,
-        "message" => "Registration successful! Please check your email to activate your account.",
-        "location" => "login.php"
+        "message" => "Registration successful! Redirecting to home...",
+        "location" => "../userDashboard/home.php"
     ]);
+    exit;
 } else {
     echo json_encode([
         "status" => 500,
         "message" => "Database error, please try again."
     ]);
+    exit;
 }
-?>

@@ -6,7 +6,7 @@
     <title>Create Account – Smile Dental</title>
     <link rel="stylesheet" href="/smile-dental/style.css">
 </head>
-<body>
+<body class="auth-body">
 
     <img src="/smile-dental/image/background.jpg" alt="" class="bg-image">
 

@@ -1,143 +1,155 @@
 <?php
-require_once __DIR__ . '/../auth/auth_check.php';
-// PHP Logic for services and dentists
+require_once __DIR__ . '/../auth/session_15.php';
+require_once __DIR__ . '/../auth/db.php';
+
+// 🔐 Kontroll login
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../auth/login.php");
+    exit;
+}
+
+// Merr emrin dhe mbiemrin nga DB
+$user_id = $_SESSION['user_id'];
+$stmt = $conn->prepare("SELECT firstname, lastname FROM users WHERE id = ?");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$user = $result->fetch_assoc();
+
+$firstname = $user['firstname'] ?? 'Unknown';
+$lastname  = $user['lastname'] ?? 'User';
+
+// Services (mund t’i marrësh nga DB më vonë)
 $services = [
-    "General Dentistry", 
-    "Oral Hygiene", 
-    "Invisalign", 
-    "Dental Implants", 
-    "Teeth Whitening", 
+    "General Dentistry",
+    "Oral Hygiene",
+    "Invisalign",
+    "Dental Implants",
+    "Teeth Whitening",
     "Minor Oral Surgery"
 ];
 
-$dentists = ["Dr. Smith", "Dr. Jones", "Dr. Brown"];
-
-// Placeholder for full name (usually comes from session)
-$fullname = "Savina Berisha"; 
+// Merr mesazhin nga rezervimi i fundit (nese ekziston)
+$booking_message = $_SESSION['booking_message'] ?? null;
+unset($_SESSION['booking_message']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Now - Dental Clinic</title>
-    <link rel="stylesheet" href="/smile-dental/styleUser.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Appointment | Smile Dental</title>
+
+<link rel="stylesheet" href="/smile-dental/styleUser.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
+<!-- SIDEBAR -->
 <aside class="layout-sidebar">
     <div class="sidebar-logo-box">
-        <span class="clinic-name-text">
-            <i class="fas fa-tooth"></i> Smile Dental
-        </span>
+        <span class="clinic-name-text"><i class="fas fa-tooth"></i> Smile Dental</span>
     </div>
 
     <nav class="sidebar-nav">
         <ul class="nav-links-list">
-            <li><a href="home.php" class="nav-item-link"><i class="fas fa-home nav-icon-style"></i> Dashboard</a></li>
-            <li><a href="myProfile.php" class="nav-item-link"><i class="fas fa-user-circle nav-icon-style"></i> My Profile</a></li>
-            <li><a href="bookAppointment.php" class="nav-item-link active-nav-page"><i class="fas fa-plus-circle nav-icon-style"></i> Book Now</a></li>
+            <li><a href="home.php" class="nav-item-link"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="myProfile.php" class="nav-item-link"><i class="fas fa-user-circle"></i> My Profile</a></li>
+            <li><a href="bookAppointment.php" class="nav-item-link active-nav-page"><i class="fas fa-plus-circle"></i> Book Now</a></li>
         </ul>
     </nav>
 
     <div class="logout-section-bottom">
-        <a href="logout.php" class="nav-item-link logout-color">
-            <i class="fas fa-sign-out-alt nav-icon-style"></i> Logout
-        </a>
-    </div>
+    <a href="/smile-dental/auth/logout.php" class="nav-item-link logout-color">
+        <i class="fas fa-sign-out-alt nav-icon-style"></i> Logout
+    </a>
+</div>
 </aside>
 
-<div id="dental-booking-section">
+<!-- CONTENT -->
+<main id="dental-booking-section">
     <div class="booking-card">
-        
+
         <div class="booking-header">
-            <h2><i class="fas fa-calendar-check"></i> Book Now</h2>
-            <p>Enter your details to schedule a visit.</p>
+            <h2><i class="fas fa-calendar-check"></i> Book Appointment</h2>
+            <p>Fill the form to schedule your visit</p>
         </div>
 
+        <?php if($booking_message): ?>
+            <div class="booking-message" style="padding:10px; background:#d4edda; color:#155724; margin-bottom:15px; border-radius:5px;">
+                <?php echo htmlspecialchars($booking_message); ?>
+            </div>
+        <?php endif; ?>
+
         <form action="process_booking.php" method="POST" class="booking-grid-form">
-            
-            <div class="field-wrapper full-width">
-                <label for="fullname">Patient Name</label>
+
+            <!-- FIRST NAME -->
+            <div class="field-wrapper">
+                <label>First Name</label>
                 <div class="input-container">
                     <i class="fas fa-user"></i>
-                    <input type="text" id="fullname" name="fullname" class="booking-input readonly" 
-                           value="<?php echo htmlspecialchars($fullname); ?>" readonly required>
+                    <input type="text" name="firstname" class="booking-input readonly" value="<?php echo htmlspecialchars($firstname); ?>" readonly>
                 </div>
             </div>
 
+            <!-- LAST NAME -->
             <div class="field-wrapper">
-                <label for="service">Service</label>
+                <label>Last Name</label>
+                <div class="input-container">
+                    <i class="fas fa-user"></i>
+                    <input type="text" name="lastname" class="booking-input readonly" value="<?php echo htmlspecialchars($lastname); ?>" readonly>
+                </div>
+            </div>
+
+            <!-- SERVICE -->
+            <div class="field-wrapper">
+                <label>Service</label>
                 <div class="input-container">
                     <i class="fas fa-tooth"></i>
-                    <select id="service" name="service" class="booking-select" required>
+                    <select name="service" class="booking-select" required>
                         <option value="" disabled selected>Select Service</option>
-                        <?php foreach($services as $s): ?>
-                            <option value="<?php echo $s; ?>"><?php echo $s; ?></option>
+                        <?php foreach ($services as $service): ?>
+                            <option value="<?php echo $service; ?>"><?php echo $service; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
             </div>
 
+            <!-- DATE -->
             <div class="field-wrapper">
-                <label for="dentist">Dentist</label>
-                <div class="input-container">
-                    <i class="fas fa-user-md"></i>
-                    <select id="dentist" name="dentist" class="booking-select" required>
-                        <option value="" disabled selected>Select Dentist</option>
-                        <?php foreach($dentists as $d): ?>
-                            <option value="<?php echo $d; ?>"><?php echo $d; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-            </div>
-
-            <div class="field-wrapper">
-                <label for="date">Date</label>
+                <label>Date</label>
                 <div class="input-container">
                     <i class="fas fa-calendar-day"></i>
-                    <input type="date" id="date" name="date" class="booking-input" required>
+                    <input type="date" name="date" class="booking-input" required>
                 </div>
             </div>
 
+            <!-- TIME -->
             <div class="field-wrapper">
-                <label for="time">Time</label>
+                <label>Time</label>
                 <div class="input-container">
                     <i class="fas fa-clock"></i>
-                    <input type="time" id="time" name="time" class="booking-input" required>
+                    <input type="time" name="time" class="booking-input" required>
                 </div>
             </div>
 
+            <!-- MESSAGE -->
             <div class="field-wrapper full-width">
-                <label for="message">Symptoms / Notes</label>
+                <label>Symptoms / Notes</label>
                 <div class="input-container">
-                   <i class="fas fa-comment-medical" style="margin-top: 15px;"></i>
-                    <textarea id="message" name="message" class="booking-input" 
-                              placeholder="Describe your symptoms..." 
-                              style="height: 80px; padding-top: 10px; resize: none;" required></textarea>
+                    <i class="fas fa-comment-medical" style="margin-top:14px;"></i>
+                    <textarea name="message" class="booking-input" placeholder="Describe your symptoms..." style="height:80px; resize:none;" required></textarea>
                 </div>
             </div>
 
+            <!-- SUBMIT -->
             <div class="field-wrapper full-width">
-                <button type="submit" class="booking-submit-btn">
-                    Confirm Booking <i class="fas fa-check"></i>
-                </button>
+                <button type="submit" class="booking-submit-btn">Confirm Booking <i class="fas fa-check"></i></button>
             </div>
 
         </form>
     </div>
-</div>
-<footer class="dashboard-footer">
-    <div class="footer-container">
-        <p>© 2025 Smile Dental. All rights reserved.</p>
-        <div class="footer-links">
-            <a href="../pages/contact.php">Contact</a>
-            <span class="separator">|</span>
-            <a href="../pages/privacy.php">Privacy Policy</a>
-        </div>
-    </div>
-</footer>
+</main>
 
 </body>
 </html>

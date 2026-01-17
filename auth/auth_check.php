@@ -1,8 +1,8 @@
 <?php
-require_once __DIR__ . '/session_15.php';
-if (!isset($_SESSION['user_id'])) {
-   header("Location: /smile-dental/auth/login.php");
-exit;
-}
+session_start();
 
-//Kjo eshte per redirect
+if (!isset($_SESSION['user_id'])) {
+    header("Location: /smile-dental/auth/login.php");
+    exit;
+}
+?>
